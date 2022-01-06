@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>글작성</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+
+
+  <style>
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    a.underline:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0px;
+    }
+
+    .main_box {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .top_box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .home {
+      font-size: 40px;
+      margin-left: 20px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      margin-right: 370px;
+    }
+
+    .login {}
+
+    .text_box {
+      resize: none;
+      width: 700px;
+      height: 300px;
+    }
+
+    .title {
+      margin-bottom: 10px;
+    }
+
+    .button_box {
+      display: flex;
+      justify-content: center;
+    }
+
+    .submit_button {
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main_box">
+    <div class="top_box">
+      <div class="home">
+        <a href='home.html'>HOME</a>
+      </div>
+
+      <div class="login">
+        <form action="" method="post">
+          <input type="text" name="id" placeholder="아이디">
+          <input type="password" name="pw" placeholder="비밀번호">
+          <input type="submit" value="로그인">
+          <input type="button" id="gloginbtn" value="checking" onclick="
+            if(this.value === 'Google Login'){
+              gauth.signIn().then(function(){
+                console.log('gauth.signIn()');
+                checkLoginStatus();
+              });
+            }
+            else{
+              gauth.signOut().then(function(){
+                console.log('gauth.signOut()');
+                disc();
+                checkLoginStatus();
+                window.location.reload();
+              });
+            }
+          ">
+          <input type="button" value="회원가입" onClick="location.href='join.html'">
+        </form>
+      </div>
+    </div>
+
+    <form action="">
+      <div class="write_box">
+        제목 : <input class="title" type="text" name="title" placeholder="제목" size="80" maxlength="50">
+        <textarea id="summernote" name="editordata"></textarea>
+      </div>
+
+      <div class="button_box">
+        <input class="submit_button" type="submit" value="작성">
+        <input class="reset_button" type="reset" value="취소">
+      </div>
+    </form>
+
+
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        height: 300,
+        minHeight: null,
+        maxHeight: null,
+        focus: true,
+        lang: "ko-KR",
+        placeholder: '최대 2048자까지 쓸 수 있습니다',
+        toolbar: [
+          ['fontname', ['fontname']],
+          ['fontsize', ['fontsize']],
+          ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+          ['color', ['forecolor', 'color']],
+          ['table', ['table']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']],
+          ['insert', ['picture', 'link', 'video']],
+          ['view', ['fullscreen', 'help']]
+        ],
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36']
+      });
+    });
+
+    function disc() {
+      console.log('disconnect');
+      gauth.disconnect();
+    }
+
+    function checkLoginStatus() {
+      var gloginbtn = document.querySelector('#gloginbtn');
+      console.log('cklogin');
+      if (gauth.isSignedIn.get()) {
+        console.log('login');
+        gloginbtn.value = 'Google Logout';
+      } else {
+        console.log('logout');
+        gloginbtn.value = 'Google Login';
+      }
+    }
+
+    function init() {
+      console.log('init')
+      gapi.load('auth2', function() {
+        console.log('auth2');
+        window.gauth = gapi.auth2.init({
+          client_id: '780511091419-s798en1245rvsduvifdcn7t2etsrhqb5.apps.googleusercontent.com'
+        })
+        gauth.then(function() {
+          console.log('google auth success');
+          checkLoginStatus()
+        }, function() {
+          console.log('google auth fail');
+        })
+      });
+    }
+  </script>
+  <!-- 구글 api 사용을 위한 스크립트 -->
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+
+</html>
