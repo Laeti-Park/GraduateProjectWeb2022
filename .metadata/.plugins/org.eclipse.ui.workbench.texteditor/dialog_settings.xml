@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="function create"/>
+		<list key="findhistory">
+			<item value="function create"/>
+			<item value="비밀번호"/>
+			<item value="ajax"/>
+			<item value="function createi"/>
+			<item value="create item"/>
+			<item value="function drop"/>
+			<item value="change"/>
+			<item value="function dro"/>
+			<item value="function mouse"/>
+			<item value="d:"/>
+			<item value="utf"/>
+			<item value="대학일기"/>
+			<item value="dao"/>
+			<item value="filedata"/>
+			<item value="fileForm"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="276"/>
+		<item key="DIALOG_Y_ORIGIN" value="214"/>
+		<item key="DIALOG_WIDTH" value="281"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>
